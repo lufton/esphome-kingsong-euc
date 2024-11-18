@@ -15,9 +15,11 @@ By using this project, you acknowledge and agree to these terms. If you do not a
 
 ## Important note
 
-This project is still in progress, there are some minor issues and bugs. Right now I was only able to test it with my KS22 Pro Plus EUC, witch has only part of exposed features this component capable.
+This project is still in progress, there are some minor issues and bugs. Right now I was only able to test it with my S22 Pro Plus EUC, witch has only part of exposed features this component capable.
 
-> Please note that for some reason my setup (ESP32-C3 super mini) doesn't connect with EUC directly. I'm using BT proxy feature of [eucWatch](https://github.com/enaon/eucWatch). I believe this feature is also available in some custom EUC apps. I'm trying to solve this issue, maybe that is due hardware that I use, I already ordered another ESP32 dev board to check.
+Make sure you are not overloading your configuration with redundant entities as it can lead to lack of memory, especially if you add additional components to your project. You can use [`free`](https://esphome.io/components/debug.html#sensor) sensor of `debug` component to check free memory. I recommend to disable components like `ota`, `captive_portal`, `logger`, etc on production.
+
+> Please note that for some reason my setup (ESP32-C3 super mini) doesn't connect with EUC directly. I'm using BT proxy feature of [eucWatch](https://github.com/enaon/eucWatch). I believe this feature is also available in some custom EUC apps. I'm trying to solve this issue, maybe that is due to hardware that I use, I already ordered another ESP32 dev board to check.
 >
 > If you have solution or further investigation on this, please create PR or contact me.
 
