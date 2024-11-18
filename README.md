@@ -188,7 +188,7 @@ sensor:
 ### Switches
 
 | ID | Description | Requestable |
-| - | - | - | - |
+| - | - | - |
 | `circle_light` | circle light switch | yes |
 | `lift_sensor` | lift sensor switch | yes |
 | `music_bluetooth` | music bluetooth switch | yes |
@@ -212,4 +212,4 @@ sensor:
 
 Please feel free to contribute. If you have improvement ideas, bug-fixes or even confirmation that this project worked for you, please create relevant issue.
 
-> I spent almost a month developing this project, if you appreciate my work please consider [donating or subscribe via PayPal](https://www.paypal.com/donate/?hosted_button_id=RULD2P56VXB4W).
+> I spent almost a month developing just a proof of concept of this project, if you appreciate my work please consider [donating or subscribe via PayPal](https://www.paypal.com/donate/?hosted_button_id=RULD2P56VXB4W).
