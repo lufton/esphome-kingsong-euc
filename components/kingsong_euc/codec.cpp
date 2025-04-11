@@ -207,6 +207,7 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
       this->set_bms_2_firmware(this->get_string());
       break;
 #endif
+#endif
     case PKT_ALARMS_PASS:  // 231
       this->set_alarms_pass(this->get_string().length() == 6 ? this->get_string() : "");
       break;
