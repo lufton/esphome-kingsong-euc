@@ -180,21 +180,27 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
     case PKT_BMS1_SERIAL:  // 225
       this->set_bms_1_serial(this->get_string());
       break;
+#if KINGSONG_EUC_BMS_COUNT > 1
     case PKT_BMS2_SERIAL:  // 226
       this->set_bms_2_serial(this->get_string());
       break;
+#endif
     case PKT_BMS1_MANUFACTURE_DATE:  // 227
       this->set_bms_1_manufacture_date(this->get_string());
       break;
+#if KINGSONG_EUC_BMS_COUNT > 1
     case PKT_BMS2_MANUFACTURE_DATE:  // 228
       this->set_bms_2_manufacture_date(this->get_string());
       break;
+#endif
     case PKT_BMS1_FIRMWARE:  // 229
       this->set_bms_1_firmware(this->get_string());
       break;
+#if KINGSONG_EUC_BMS_COUNT > 1
     case PKT_BMS2_FIRMWARE:  // 230
       this->set_bms_2_firmware(this->get_string());
       break;
+#endif
     case PKT_ALARMS_PASS:  // 231
       this->set_alarms_pass(this->get_string().length() == 6 ? this->get_string() : "");
       break;
