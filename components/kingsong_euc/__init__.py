@@ -35,7 +35,7 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend(
 KINGSONG_EUC_COMPONENT_CONFIG_SCHEMA = cv.Schema(
     {
         cv.GenerateID(CONF_KINGSONG_EUC_ID): cv.use_id(KingSongEUC),
-        cv.Optional(CONF_BMS_COUNT, default=1): cv.int_range(1, 2),
+        cv.Optional(CONF_BMS_COUNT, default=1): cv.int_range(0, 2),  # TODO: move to KingSongEUC
         cv.Optional(CONF_CELL_COUNT, default=16): cv.one_of(*CELL_COUNT_OPTIONS),
     }
 )

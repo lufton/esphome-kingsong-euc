@@ -177,27 +177,40 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
     case PKT_MODEL:  // 187
       this->set_model(this->get_string());
       break;
+#if KINGSONG_EUC_BMS_COUNT > 0
     case PKT_BMS1_SERIAL:  // 225
       this->set_bms_1_serial(this->get_string());
       break;
+#endif
+#if KINGSONG_EUC_BMS_COUNT > 1
     case PKT_BMS2_SERIAL:  // 226
       this->set_bms_2_serial(this->get_string());
       break;
+#endif
+#if KINGSONG_EUC_BMS_COUNT > 0
     case PKT_BMS1_MANUFACTURE_DATE:  // 227
       this->set_bms_1_manufacture_date(this->get_string());
       break;
+#endif
+#if KINGSONG_EUC_BMS_COUNT > 1
     case PKT_BMS2_MANUFACTURE_DATE:  // 228
       this->set_bms_2_manufacture_date(this->get_string());
       break;
+#endif
+#if KINGSONG_EUC_BMS_COUNT > 0
     case PKT_BMS1_FIRMWARE:  // 229
       this->set_bms_1_firmware(this->get_string());
       break;
+#endif
+#if KINGSONG_EUC_BMS_COUNT > 1
     case PKT_BMS2_FIRMWARE:  // 230
       this->set_bms_2_firmware(this->get_string());
       break;
+#endif
     case PKT_ALARMS_PASS:  // 231
       this->set_alarms_pass(this->get_string().length() == 6 ? this->get_string() : "");
       break;
+#if KINGSONG_EUC_BMS_COUNT > 0
     case PKT_BMS1:  // 241
       switch (this->get_bms_packet()) {
         case GENERAL:
@@ -267,6 +280,8 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
           break;
       }
       break;
+#endif  // KINGSONG_EUC_BMS_COUNT > 0
+#if KINGSONG_EUC_BMS_COUNT > 1
     case PKT_BMS2:  // 242
       switch (this->get_bms_packet()) {
         case GENERAL:
@@ -336,6 +351,7 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
           break;
       }
       break;
+#endif  // KINGSONG_EUC_BMS_COUNT > 1
     case PKT_F5:  // 245
       this->set_phase_short_circuit(this->get_byte(6) > 0);
       this->set_gyroscope_error(this->get_byte(7) > 0);

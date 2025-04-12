@@ -182,25 +182,37 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
         case PKT_MODEL:  // 187
           PUBLISH_STATE(this->model_text_sensor_, codec->get_model());
           break;
+#if KINGSONG_EUC_BMS_COUNT > 0
         case PKT_BMS1_SERIAL:  // 225
           PUBLISH_STATE(this->bms_1_serial_text_sensor_, codec->get_bms_1_serial());
           break;
+#endif
+
+#if KINGSONG_EUC_BMS_COUNT > 1
         case PKT_BMS2_SERIAL:  // 226
           PUBLISH_STATE(this->bms_2_serial_text_sensor_, codec->get_bms_2_serial());
           break;
+#endif
         case PKT_BMS1_MANUFACTURE_DATE:  // 227
+#if KINGSONG_EUC_BMS_COUNT > 0
           PUBLISH_STATE(this->bms_1_manufacture_date_text_sensor_, codec->get_bms_1_manufacture_date());
+#endif
           break;
+#if KINGSONG_EUC_BMS_COUNT > 1
         case PKT_BMS2_MANUFACTURE_DATE:  // 228
           PUBLISH_STATE(this->bms_2_manufacture_date_text_sensor_, codec->get_bms_2_manufacture_date());
           break;
+#endif
         case PKT_BMS1_FIRMWARE:  // 229
           PUBLISH_STATE(this->bms_1_firmware_text_sensor_, codec->get_bms_1_firmware());
           break;
+#if KINGSONG_EUC_BMS_COUNT > 1
         case PKT_BMS2_FIRMWARE:  // 230
           PUBLISH_STATE(this->bms_2_firmware_text_sensor_, codec->get_bms_2_firmware());
           break;
+#endif
         case PKT_BMS1:  // 241
+#if KINGSONG_EUC_BMS_COUNT > 0
           switch (codec->get_bms_packet()) {
             case GENERAL:
               PUBLISH_STATE(this->bms_1_voltage_sensor_, codec->get_bms_1_voltage());
@@ -268,8 +280,10 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
 #endif
               break;
           }
+#endif
           break;
         case PKT_BMS2:  // 242
+#if KINGSONG_EUC_BMS_COUNT > 1
           switch (codec->get_bms_packet()) {
             case GENERAL:
               PUBLISH_STATE(this->bms_2_voltage_sensor_, codec->get_bms_2_voltage());
@@ -337,6 +351,7 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
 #endif
               break;
           }
+#endif  // KINGSONG_EUC_BMS_COUNT > 1
           break;
         case PKT_F5:  // 245
           PUBLISH_STATE(this->phase_short_circuit_binary_sensor_, codec->get_phase_short_circuit());
