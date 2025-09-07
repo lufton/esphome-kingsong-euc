@@ -8,6 +8,7 @@ from esphome.const import (
     CONF_MIN_VALUE,
     CONF_MODE,
     CONF_STEP,
+    DEVICE_CLASS_DURATION,
     ENTITY_CATEGORY_CONFIG,
     ENTITY_CATEGORY_DIAGNOSTIC,
     UNIT_KILOMETER_PER_HOUR,
@@ -64,6 +65,7 @@ NUMBER_TYPES = {
         KingSongEUCNumber,
         icon=ICON_TIMER_STOP,
         unit_of_measurement=UNIT_SECOND,
+        device_class=DEVICE_CLASS_DURATION,
         entity_category=ENTITY_CATEGORY_CONFIG,
     ),
     CONF_TILT_BACK: number.number_schema(

@@ -78,7 +78,13 @@ class KingSongEUCNumber : public number::Number, public KingSongEUCBaseEntity {
   void control(float value) {
     if (!this->is_connected())
       return;
-    uint8_t command;
+    if (this->number_type_ == KingSongEUCNumberType::COMMAND) {
+        uint8_t command = static_cast<uint8_t>(std::round(value));
+        this->get_parent()->send_command(value);
+        ESP_LOGD(TAG, "Sending command: 0x%2X (%d)", command, command);
+        return;
+    }
+    this->publish_state(value);
     switch (this->number_type_) {
       case KingSongEUCNumberType::ALARM_1:
         this->get_parent()->set_alarm_1(value);
@@ -91,11 +97,6 @@ class KingSongEUCNumber : public number::Number, public KingSongEUCBaseEntity {
       case KingSongEUCNumberType::ALARM_3:
         this->get_parent()->set_alarm_3(value);
         this->last_updated_ = 0;
-        break;
-      case KingSongEUCNumberType::COMMAND:
-        command = static_cast<uint8_t>(std::round(value));
-        this->get_parent()->send_command(value);
-        ESP_LOGD(TAG, "Sending command: 0x%2X (%d)", command, command);
         break;
       case KingSongEUCNumberType::STANDBY_DELAY:
         this->get_parent()->set_standby_delay(value);

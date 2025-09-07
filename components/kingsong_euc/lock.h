@@ -62,6 +62,7 @@ class KingSongEUCLock : public lock::Lock, public KingSongEUCBaseEntity {
     if (!this->is_connected())
       return;
     lock::LockState state = *call.get_state();
+    this->publish_state(state);
     if (state == lock::LOCK_STATE_LOCKED) {
       switch (this->lock_type_) {
         case KingSongEUCLockType::LOCK:

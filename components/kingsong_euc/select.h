@@ -81,6 +81,7 @@ class KingSongEUCSelect : public select::Select, public KingSongEUCBaseEntity {
     auto index = this->index_of(value);
     if (!index.has_value())
       return;
+    this->publish_state(value);
     switch (this->select_type_) {
       case KingSongEUCSelectType::MAGIC_LIGHT_MODE:
         return this->get_parent()->set_magic_light_mode(index.value());
