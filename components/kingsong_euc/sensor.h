@@ -65,13 +65,13 @@ class KingSongEUCSensor : public sensor::Sensor, public KingSongEUCBaseEntity {
   void dump_config() { LOG_SENSOR("  ", this->type_.c_str(), this); }
 
   bool has_state() override {
-    return this->state_.has_value() && this->last_updated_ > 0 && KingSongEUCBaseEntity::has_state();
+    return this->has_state_ && this->last_updated_ > 0 && KingSongEUCBaseEntity::has_state();
   }
 
   void publish_state(float state) {
     float prev_state = this->state;
     this->state = state;
-    // this->has_state_ = true;
+    this->has_state_ = true;
     this->just_updated();
     if (prev_state == NAN || std::abs(prev_state - state) >= this->hysteresis_)
       this->report_state();

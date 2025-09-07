@@ -39,12 +39,12 @@ class KingSongEUCTextSensor : public text_sensor::TextSensor, public KingSongEUC
 
   void dump_config() { LOG_TEXT_SENSOR("  ", this->type_.c_str(), this); }
 
-  bool has_state() override { return this->state_.has_value() && KingSongEUCBaseEntity::has_state(); }
+  bool has_state() override { return this->has_state_ && KingSongEUCBaseEntity::has_state(); }
 
   void publish_state(const std::string state) {
     const std::string prev_state = this->state;
     this->state = state;
-    // this->has_state_ = true;
+    this->has_state_ = true;
     this->just_updated();
     if (state != prev_state)
       this->report_state();
