@@ -60,6 +60,7 @@ class KingSongEUCBaseEntity : public Parented<KingSongEUCClient>, public Polling
   uint32_t last_updated_ = 0;
   std::string type_;
   uint32_t report_interval_ = 0;
+  bool has_state_ = false;
 };
 
 }  // namespace kingsong_euc
