@@ -38,13 +38,13 @@ class KingSongEUCSelect : public select::Select, public KingSongEUCBaseEntity {
   void dump_config() { LOG_SELECT("  ", this->type_.c_str(), this); }
 
   bool has_state() override {
-    return this->has_state_ && this->last_updated_ > 0 && KingSongEUCBaseEntity::has_state();
+    return this->state_.has_value() && this->last_updated_ > 0 && KingSongEUCBaseEntity::has_state();
   }
 
   void publish_state(const std::string &state) {
     const std::string prev_state = this->state;
     this->state = state;
-    this->has_state_ = true;
+    // this->has_state_ = true;
     this->just_updated();
     if (state != prev_state)
       this->report_state();

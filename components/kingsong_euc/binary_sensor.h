@@ -37,13 +37,13 @@ class KingSongEUCBinarySensor : public binary_sensor::BinarySensor, public KingS
   void dump_config() { LOG_BINARY_SENSOR("  ", this->type_.c_str(), this); }
 
   bool has_state() override {
-    return this->has_state_ && this->last_updated_ > 0 && KingSongEUCBaseEntity::has_state();
+    return this->state_.has_value() && this->last_updated_ > 0 && KingSongEUCBaseEntity::has_state();
   }
 
   void publish_state(bool state) {
     bool prev_state = this->state;
     this->state = state;
-    this->has_state_ = true;
+    // this->has_state_ = true;
     this->just_updated();
     if (state != prev_state)
       this->report_state();
