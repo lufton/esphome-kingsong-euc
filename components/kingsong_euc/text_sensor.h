@@ -23,11 +23,11 @@ namespace kingsong_euc {
 enum class KingSongEUCTextSensorType {
   BMS_FIRMWARE,
   BMS_MANUFACTURE_DATE,
-  BMS_SERIAL,
+  BMS_SERIAL_NUMBER,
   CHARGING_STATUS,
   ERROR_DESCRIPTION,
   MODEL,
-  SERIAL,
+  SERIAL_NUMBER,
 };
 
 class KingSongEUCTextSensor : public text_sensor::TextSensor, public KingSongEUCBaseEntity {
@@ -65,15 +65,15 @@ class KingSongEUCTextSensor : public text_sensor::TextSensor, public KingSongEUC
         this->get_parent()->get_bms_1_manufacture_date();
         this->get_parent()->get_bms_2_manufacture_date();
         break;
-      case KingSongEUCTextSensorType::BMS_SERIAL:
-        this->get_parent()->get_bms_1_serial();
-        this->get_parent()->get_bms_2_serial();
+      case KingSongEUCTextSensorType::BMS_SERIAL_NUMBER:
+        this->get_parent()->get_bms_1_serial_number();
+        this->get_parent()->get_bms_2_serial_number();
         break;
       case KingSongEUCTextSensorType::MODEL:
         this->get_parent()->get_model();
         break;
-      case KingSongEUCTextSensorType::SERIAL:
-        this->get_parent()->get_serial();
+      case KingSongEUCTextSensorType::SERIAL_NUMBER:
+        this->get_parent()->get_serial_number();
         break;
       case KingSongEUCTextSensorType::CHARGING_STATUS:
       case KingSongEUCTextSensorType::ERROR_DESCRIPTION:

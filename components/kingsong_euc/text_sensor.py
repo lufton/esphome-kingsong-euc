@@ -22,10 +22,10 @@ KingSongEUCTextSensorTypeEnum = kingsong_euc_ns.enum("KingSongEUCTextSensorType"
 
 CONF_BMS_FIRMWARE = "bms_firmware"
 CONF_BMS_MANUFACTURE_DATE = "bms_manufacture_date"
-CONF_BMS_SERIAL = "bms_serial"
+CONF_BMS_SERIAL_NUMBER = "bms_serial_number"
 CONF_CHARGING_STATUS = "charging_status"
 CONF_ERROR_DESCRIPTION = "error_description"
-CONF_SERIAL = "serial"
+CONF_SERIAL_NUMBER = "serial_number"
 ICON_ALERT = "mdi:alert"
 ICON_BATTERY_CHARGING = "mdi:battery-charging"
 ICON_CALENDAR = "mdi:calendar"
@@ -41,7 +41,7 @@ TEXT_SENSOR_TYPES = {
         icon=ICON_CALENDAR,
         entity_category=ENTITY_CATEGORY_DIAGNOSTIC,
     ),
-    CONF_BMS_SERIAL: text_sensor.text_sensor_schema(
+    CONF_BMS_SERIAL_NUMBER: text_sensor.text_sensor_schema(
         KingSongEUCTextSensor,
         icon=ICON_NUMERIC,
         entity_category=ENTITY_CATEGORY_DIAGNOSTIC,
@@ -61,7 +61,7 @@ TEXT_SENSOR_TYPES = {
         icon=ICON_NUMERIC,
         entity_category=ENTITY_CATEGORY_DIAGNOSTIC,
     ),
-    CONF_SERIAL: text_sensor.text_sensor_schema(
+    CONF_SERIAL_NUMBER: text_sensor.text_sensor_schema(
         KingSongEUCTextSensor,
         icon=ICON_NUMERIC,
         entity_category=ENTITY_CATEGORY_DIAGNOSTIC,

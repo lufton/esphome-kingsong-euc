@@ -155,8 +155,8 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
       this->set_ride_mode(this->get_byte(14));
       this->set_power(this->voltage_ * this->current_);
       break;
-    case PKT_SERIAL:  // 179
-      this->set_serial(this->get_string());
+    case PKT_SERIAL_NUMBER:  // 179
+      this->set_serial_number(this->get_string());
       break;
     case PKT_ALARMS:  // 181
       this->set_alarm_1(this->get_word(4));
@@ -177,11 +177,11 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
     case PKT_MODEL:  // 187
       this->set_model(this->get_string());
       break;
-    case PKT_BMS1_SERIAL:  // 225
-      this->set_bms_1_serial(this->get_string());
+    case PKT_BMS1_SERIAL_NUMBER:  // 225
+      this->set_bms_1_serial_number(this->get_string());
       break;
-    case PKT_BMS2_SERIAL:  // 226
-      this->set_bms_2_serial(this->get_string());
+    case PKT_BMS2_SERIAL_NUMBER:  // 226
+      this->set_bms_2_serial_number(this->get_string());
       break;
     case PKT_BMS1_MANUFACTURE_DATE:  // 227
       this->set_bms_1_manufacture_date(this->get_string());

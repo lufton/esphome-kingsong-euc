@@ -141,7 +141,7 @@ sensor:
 | `alarm_3` | speed for third alarm beep | 0 | 70 | km/h | yes |
 | `command` | manual command request | 0 | 255 | N/A | yes |
 | `standby_delay` | delay before EUC turns off after being inactive | 0 | 14400 | sec | yes |
-| tilt_back | speed for tilt back | 0 | 70 | km/h | yes |
+| `tilt_back` | speed for tilt back | 0 | 70 | km/h | yes |
 
 ### Selects
 
@@ -203,12 +203,12 @@ sensor:
 | ID | Description | Requestable |
 | - | - | - |
 | `bms_firmware` | firmware version of each BMS | yes |
-| `bms_manufacture_date` | firmware version of each BMS | yes |
-| `bms_serial` | firmware version of each BMS | yes |
+| `bms_manufacture_date` | manufacture date of each BMS | yes |
+| `bms_serial_number` | serial number of each BMS | yes |
 | `charging_status` | charging status (`Not charging`, `Charging`, `Discharged`, `Overcharged (charger)`, `Overcharged (regeneration)` | no |
 | `error_description` | error description (taken from https://support.euco.us/article/319-kingsong-error-codes) | no |
 | `model` | EUC model | yes |
-| `serial` | UEC serial number | yes |
+| `serial_number` | UEC serial number | yes |
 
 ## Contribution
 

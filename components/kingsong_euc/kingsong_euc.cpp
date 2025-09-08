@@ -157,8 +157,8 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
             PUBLISH_STATE(this->ride_mode_select_, ride_mode_options[codec->get_ride_mode()]);
           PUBLISH_STATE(this->power_sensor_, codec->get_power());
           break;
-        case PKT_SERIAL:  // 179
-          PUBLISH_STATE(this->serial_text_sensor_, codec->get_serial());
+        case PKT_SERIAL_NUMBER:  // 179
+          PUBLISH_STATE(this->serial_number_text_sensor_, codec->get_serial_number());
           break;
         case PKT_ALARMS:  // 181
           PUBLISH_STATE(this->alarm_1_number_, codec->get_alarm_1());
@@ -182,11 +182,11 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
         case PKT_MODEL:  // 187
           PUBLISH_STATE(this->model_text_sensor_, codec->get_model());
           break;
-        case PKT_BMS1_SERIAL:  // 225
-          PUBLISH_STATE(this->bms_1_serial_text_sensor_, codec->get_bms_1_serial());
+        case PKT_BMS1_SERIAL_NUMBER:  // 225
+          PUBLISH_STATE(this->bms_1_serial_number_text_sensor_, codec->get_bms_1_serial_number());
           break;
-        case PKT_BMS2_SERIAL:  // 226
-          PUBLISH_STATE(this->bms_2_serial_text_sensor_, codec->get_bms_2_serial());
+        case PKT_BMS2_SERIAL_NUMBER:  // 226
+          PUBLISH_STATE(this->bms_2_serial_number_text_sensor_, codec->get_bms_2_serial_number());
           break;
         case PKT_BMS1_MANUFACTURE_DATE:  // 227
           PUBLISH_STATE(this->bms_1_manufacture_date_text_sensor_, codec->get_bms_1_manufacture_date());

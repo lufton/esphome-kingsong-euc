@@ -61,7 +61,7 @@ namespace kingsong_euc {
   GETTER_FIELD(float, bms_##bms##_mosfet_temperature) \
   GETTER_FIELD(float, bms_##bms##_soc) \
   GETTER_FIELD(uint32_t, bms_##bms##_remaining_capacity) \
-  GETTER_FIELD(std::string, bms_##bms##_serial) \
+  GETTER_FIELD(std::string, bms_##bms##_serial_number) \
   GETTER_FIELD(float, bms_##bms##_temperature_1) \
   GETTER_FIELD(float, bms_##bms##_temperature_2) \
   GETTER_FIELD(float, bms_##bms##_temperature_3) \
@@ -112,10 +112,10 @@ class KingSongEUCCodec {
   CMD_REQUEST(get_alarms_pass, CMD_GET_ALARMS_PASS)
   CMD_REQUEST_EMPTY_TAIL(get_bms_1_firmware, CMD_GET_BMS_1_FIRMWARE)
   CMD_REQUEST_EMPTY_TAIL(get_bms_1_manufacture_date, CMD_GET_BMS_1_MANUFACTURE_DATE)
-  CMD_REQUEST_EMPTY_TAIL(get_bms_1_serial, CMD_GET_BMS_1_SERIAL)
+  CMD_REQUEST_EMPTY_TAIL(get_bms_1_serial_number, CMD_GET_BMS_1_SERIAL_NUMBER)
   CMD_REQUEST_EMPTY_TAIL(get_bms_2_firmware, CMD_GET_BMS_2_FIRMWARE)
   CMD_REQUEST_EMPTY_TAIL(get_bms_2_manufacture_date, CMD_GET_BMS_2_MANUFACTURE_DATE)
-  CMD_REQUEST_EMPTY_TAIL(get_bms_2_serial, CMD_GET_BMS_2_SERIAL)
+  CMD_REQUEST_EMPTY_TAIL(get_bms_2_serial_number, CMD_GET_BMS_2_SERIAL_NUMBER)
   CMD_REQUEST(get_alarms, CMD_GET_ALARMS)
   CMD_REQUEST(get_bluetooth_pass, CMD_GET_PASS)
   CMD_REQUEST(get_circle_light, CMD_GET_CIRCLE_LIGHT)
@@ -123,7 +123,7 @@ class KingSongEUCCodec {
   CMD_REQUEST(get_lift_sensor, CMD_GET_LIFT_SENSOR)
   CMD_REQUEST(get_lock, CMD_GET_LOCK)
   CMD_REQUEST(get_model, CMD_GET_MODEL)
-  CMD_REQUEST(get_serial, CMD_GET_SERIAL)
+  CMD_REQUEST(get_serial_number, CMD_GET_SERIAL_NUMBER)
   CMD_REQUEST(get_standby_delay, CMD_GET_STANDBY_DELAY)
   CMD_REQUEST(get_magic_light_mode, CMD_GET_MAGIC_LIGHT_MODE)
   CMD_REQUEST(get_music_bluetooth, CMD_GET_MUSIC_BLUETOOTH)
@@ -205,7 +205,7 @@ class KingSongEUCCodec {
   GETTER_FIELD(uint16_t, pwm)
   GETTER_FIELD(uint8_t, ride_mode)
   GETTER_FIELD(uint16_t, ride_time)
-  GETTER_FIELD(std::string, serial)
+  GETTER_FIELD(std::string, serial_number)
   GETTER_FIELD(bool, spectrum_light)
   GETTER_FIELD(uint8_t, spectrum_light_mode)
   GETTER_FIELD(float, speed)

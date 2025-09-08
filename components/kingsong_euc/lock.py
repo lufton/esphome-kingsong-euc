@@ -19,7 +19,7 @@ KingSongEUCLockTypeEnum = kingsong_euc_ns.enum("KingSongEUCLockType", True)
 CONF_LOCK = "lock"
 
 LOCK_TYPES = {
-    CONF_LOCK: lock.LOCK_SCHEMA.extend(
+    CONF_LOCK: lock.lock_schema(KingSongEUCLock).extend(
         {
             cv.GenerateID(): cv.declare_id(KingSongEUCLock),
         }

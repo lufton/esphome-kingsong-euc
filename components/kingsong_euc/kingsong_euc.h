@@ -27,7 +27,7 @@ namespace kingsong_euc {
   REGISTER_TEXT_SENSOR(bms_##bms##_firmware) \
   REGISTER_SENSOR(bms_##bms##_full_cycles) \
   REGISTER_TEXT_SENSOR(bms_##bms##_manufacture_date) \
-  REGISTER_TEXT_SENSOR(bms_##bms##_serial) \
+  REGISTER_TEXT_SENSOR(bms_##bms##_serial_number) \
   REGISTER_SENSOR(bms_##bms##_soc) \
   REGISTER_SENSOR(bms_##bms##_remaining_capacity) \
   REGISTER_SENSOR(bms_##bms##_voltage) \
@@ -134,7 +134,7 @@ class KingSongEUC : public KingSongEUCClient, public Component {
   REGISTER_TEXT_SENSOR(charging_status)
   REGISTER_TEXT_SENSOR(error_description)
   REGISTER_TEXT_SENSOR(model)
-  REGISTER_TEXT_SENSOR(serial)
+  REGISTER_TEXT_SENSOR(serial_number)
 
   REGISTER_BMS_SENSORS(1)
   REGISTER_BMS_CELL_VOLTAGE_SENSORS_1_16(1)
