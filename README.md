@@ -53,7 +53,7 @@ sensor:
 
 ### bms_count
 
-`bms_count` platform parameter defines how many BMSs does EUC have. That will automatically populate relevant sensors (`bms_cell_voltage`, `bms_current`, `bms_factory_capacity`, `bms_full_cycles`, `bms_mosfet_temperature`, `bms_remaining_capacity`, `bms_soc`, `bms_temperature_1`, `bms_temperature_2`, `bms_temperature_3`, `bms_temperature_4`, `bms_temperature_5`, `bms_temperature_6`, `bms_voltage`) and text sensors (`bms_firmware`, `bms_manufacture_date`, `bms_serial`) for all of your BMSs. Can be `1 or 2`. `Defaults to: 1`.
+`bms_count` platform parameter defines how many BMSs does EUC have. That will automatically populate relevant sensors (`bms_cell_voltage`, `bms_current`, `bms_factory_capacity`, `bms_full_cycles`, `bms_mosfet_temperature`, `bms_remaining_capacity`, `bms_soc`, `bms_temperature_1`, `bms_temperature_2`, `bms_temperature_3`, `bms_temperature_4`, `bms_temperature_5`, `bms_temperature_6`, `bms_voltage`) and text sensors (`bms_firmware`, `bms_manufacture_date`, `bms_serial_number`) for all of your BMSs. Can be `1 or 2`. `Defaults to: 1`.
 
 ```yaml
 sensor:
