@@ -37,6 +37,7 @@ class KingSongEUCClient : public ble_client::BLEClientNode {
 
   SEND(beep)
   SEND(get_alarms)
+  SEND(get_alarms_pass)
   SEND(get_bluetooth_pass)
   SEND(get_bms_1_firmware)
   SEND(get_bms_1_manufacture_date)

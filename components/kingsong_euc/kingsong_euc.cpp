@@ -97,7 +97,7 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
     case ESP_GATTC_REG_FOR_NOTIFY_EVT: {
       this->status_clear_warning();
       this->node_state = esp32_ble_tracker::ClientState::ESTABLISHED;
-      this->send_request_(this->get_codec()->get_get_alarms_pass_request());
+      this->get_alarms_pass();
       break;
     }
     case ESP_GATTC_NOTIFY_EVT: {
