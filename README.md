@@ -22,6 +22,8 @@ Make sure you are not overloading your configuration with redundant entities as 
 > Please note that for some reason my setup (ESP32-C3 super mini) doesn't connect with EUC directly. I'm using BT proxy feature of [eucWatch](https://github.com/enaon/eucWatch). I believe this feature is also available in some custom EUC apps. I'm trying to solve this issue, maybe that is due to hardware that I use, I already ordered another ESP32 dev board to check.
 >
 > If you have solution or further investigation on this, please create PR or contact me.
+>
+> Upd: actually it occasionally works with ESP32-S3. Sometimes it connects and can get notfication with state of entities that requires separate request, but does not receive notifications for other entities state change.
 
 ### Minimal configuration
 
@@ -50,32 +52,6 @@ sensor:
 ```
 
 ## Entity parameters
-
-### bms_count
-
-`bms_count` platform parameter defines how many BMSs does EUC have. That will automatically populate relevant sensors (`bms_cell_voltage`, `bms_current`, `bms_factory_capacity`, `bms_full_cycles`, `bms_mosfet_temperature`, `bms_remaining_capacity`, `bms_soc`, `bms_temperature_1`, `bms_temperature_2`, `bms_temperature_3`, `bms_temperature_4`, `bms_temperature_5`, `bms_temperature_6`, `bms_voltage`) and text sensors (`bms_firmware`, `bms_manufacture_date`, `bms_serial_number`) for all of your BMSs. Can be `1 or 2`. `Defaults to: 1`.
-
-```yaml
-sensor:
-  - platform: kingsong_euc
-    bms_count: 2
-    bms_soc:
-      name: BMS SoC # will create bms_1_soc and bms_2_soc sensors
-```
-
-### cell_count
-
-`cell_count` platform parameter defines how many cell in series does each of BMSs have. That will automatically populate relevant sensors (`bms_cell_voltage`) for each of BMS's cells. Can be `16, 20 or 30`. `Defaults to: 16`.
-
-```yaml
-sensor:
-  - platform: kingsong_euc
-    bms_count: 2
-    cell_count: 30
-    bms_cell_voltage:
-      name: BMS cell voltage # will create bms_1_cell_1_voltage, bms_2_cell_1_voltage, ... bms_1_cell_30_voltage and bms_2_cell_30_voltage
-
-```
 
 ### report_interval
 
@@ -157,20 +133,20 @@ sensor:
 
 | ID | Description | Units | Requestable |
 | - | - | - | - |
-| `bms_cell_voltage` | voltage of each cell of each BMS | V | no |
-| `bms_current` | current of each BMS | A | no |
-| `bms_factory_capacity` | factory battery capacity of each BMS | mAh | no |
-| `bms_full_cycles` | number of full charging cycles of each BMS | N/A | no |
-| `bms_mosfet_temperature` | MOSFET temperature of each BMS | °C | no |
-| `bms_remaining_capacity` | remaining battery capacity of each BMS | mAh | no |
-| `bms_soc` | state of charge of each BMS, calculated as `bms_remaining_capacity` / `bms_factory_capacity` * 100 | % | no |
-| `bms_temperature_1` | value of temperature sensor 1 of each BMS | °C | no |
-| `bms_temperature_2` | value of temperature sensor 2 of each BMS | °C | no |
-| `bms_temperature_3` | value of temperature sensor 3 of each BMS | °C | no |
-| `bms_temperature_4` | value of temperature sensor 4 of each BMS | °C | no |
-| `bms_temperature_5` | value of temperature sensor 5 of each BMS | °C | no |
-| `bms_temperature_6` | value of temperature sensor 6 of each BMS | °C | no |
-| `bms_voltage` | voltage of each BMS | V | no |
+| `bms_N_cell_M_voltage` | voltage of M-th cell of N-th BMS | V | no |
+| `bms_N_current` | current of N-th BMS | A | no |
+| `bms_N_factory_capacity` | factory battery capacity of N-th BMS | mAh | no |
+| `bms_N_full_cycles` | number of full charging cycles of N-th BMS | N/A | no |
+| `bms_N_mosfet_temperature` | MOSFET temperature of N-th BMS | °C | no |
+| `bms_N_remaining_capacity` | remaining battery capacity of N-th BMS | mAh | no |
+| `bms_N_soc` | state of charge of N-th BMS, calculated as `bms_N_remaining_capacity` / `bms_N_factory_capacity` * 100 | % | no |
+| `bms_N_temperature_1` | value of temperature sensor 1 of N-th BMS | °C | no |
+| `bms_N_temperature_2` | value of temperature sensor 2 of N-th BMS | °C | no |
+| `bms_N_temperature_3` | value of temperature sensor 3 of N-th BMS | °C | no |
+| `bms_N_temperature_4` | value of temperature sensor 4 of N-th BMS | °C | no |
+| `bms_N_temperature_5` | value of temperature sensor 5 of N-th BMS | °C | no |
+| `bms_N_temperature_6` | value of temperature sensor 6 of N-th BMS | °C | no |
+| `bms_N_voltage` | voltage of N-th BMS | V | no |
 | `cpu_load` | CPU load | % | no |
 | `error_code` | error code (see `error_description` text sensor) | N/A | no |
 | `current` | discharging current (negative when charging) | A | no |
@@ -202,9 +178,9 @@ sensor:
 
 | ID | Description | Requestable |
 | - | - | - |
-| `bms_firmware` | firmware version of each BMS | yes |
-| `bms_manufacture_date` | manufacture date of each BMS | yes |
-| `bms_serial_number` | serial number of each BMS | yes |
+| `bms_N_firmware` | firmware version of N-th BMS | yes |
+| `bms_N_manufacture_date` | manufacture date of N-th BMS | yes |
+| `bms_N_serial_number` | serial number of N-th BMS | yes |
 | `charging_status` | charging status (`Not charging`, `Charging`, `Discharged`, `Overcharged (charger)`, `Overcharged (regeneration)` | no |
 | `error_description` | error description (taken from https://support.euco.us/article/319-kingsong-error-codes) | no |
 | `model` | EUC model | yes |

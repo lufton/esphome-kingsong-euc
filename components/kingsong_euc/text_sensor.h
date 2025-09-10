@@ -21,9 +21,12 @@ namespace kingsong_euc {
   }
 
 enum class KingSongEUCTextSensorType {
-  BMS_FIRMWARE,
-  BMS_MANUFACTURE_DATE,
-  BMS_SERIAL_NUMBER,
+  BMS_1_FIRMWARE,
+  BMS_2_FIRMWARE,
+  BMS_1_MANUFACTURE_DATE,
+  BMS_2_MANUFACTURE_DATE,
+  BMS_1_SERIAL_NUMBER,
+  BMS_2_SERIAL_NUMBER,
   CHARGING_STATUS,
   ERROR_DESCRIPTION,
   MODEL,
@@ -57,16 +60,19 @@ class KingSongEUCTextSensor : public text_sensor::TextSensor, public KingSongEUC
 
   void request_state() override {
     switch (this->text_sensor_type_) {
-      case KingSongEUCTextSensorType::BMS_FIRMWARE:
+      case KingSongEUCTextSensorType::BMS_1_FIRMWARE:
         this->get_parent()->get_bms_1_firmware();
+      case KingSongEUCTextSensorType::BMS_2_FIRMWARE:
         this->get_parent()->get_bms_2_firmware();
         break;
-      case KingSongEUCTextSensorType::BMS_MANUFACTURE_DATE:
+      case KingSongEUCTextSensorType::BMS_1_MANUFACTURE_DATE:
         this->get_parent()->get_bms_1_manufacture_date();
+      case KingSongEUCTextSensorType::BMS_2_MANUFACTURE_DATE:
         this->get_parent()->get_bms_2_manufacture_date();
         break;
-      case KingSongEUCTextSensorType::BMS_SERIAL_NUMBER:
-        this->get_parent()->get_bms_1_serial_number();
+      case KingSongEUCTextSensorType::BMS_1_SERIAL_NUMBER:
+      this->get_parent()->get_bms_1_serial_number();
+      case KingSongEUCTextSensorType::BMS_2_SERIAL_NUMBER:
         this->get_parent()->get_bms_2_serial_number();
         break;
       case KingSongEUCTextSensorType::MODEL:

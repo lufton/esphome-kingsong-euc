@@ -70,7 +70,7 @@ namespace kingsong_euc {
   GETTER_FIELD(float, bms_##bms##_temperature_6) \
   GETTER_FIELD(float, bms_##bms##_voltage)
 
-#define GETTER_FIELD_BMS_CELL_VOLTAGE_1_16(bms) \
+#define GETTER_FIELD_BMS_CELL_VOLTAGE(bms) \
   GETTER_FIELD(float, bms_##bms##_cell_1_voltage) \
   GETTER_FIELD(float, bms_##bms##_cell_2_voltage) \
   GETTER_FIELD(float, bms_##bms##_cell_3_voltage) \
@@ -86,15 +86,11 @@ namespace kingsong_euc {
   GETTER_FIELD(float, bms_##bms##_cell_13_voltage) \
   GETTER_FIELD(float, bms_##bms##_cell_14_voltage) \
   GETTER_FIELD(float, bms_##bms##_cell_15_voltage) \
-  GETTER_FIELD(float, bms_##bms##_cell_16_voltage)
-
-#define GETTER_FIELD_BMS_CELL_VOLTAGE_17_20(bms) \
+  GETTER_FIELD(float, bms_##bms##_cell_16_voltage) \
   GETTER_FIELD(float, bms_##bms##_cell_17_voltage) \
   GETTER_FIELD(float, bms_##bms##_cell_18_voltage) \
   GETTER_FIELD(float, bms_##bms##_cell_19_voltage) \
-  GETTER_FIELD(float, bms_##bms##_cell_20_voltage)
-
-#define GETTER_FIELD_BMS_CELL_VOLTAGE_21_30(bms) \
+  GETTER_FIELD(float, bms_##bms##_cell_20_voltage) \
   GETTER_FIELD(float, bms_##bms##_cell_21_voltage) \
   GETTER_FIELD(float, bms_##bms##_cell_22_voltage) \
   GETTER_FIELD(float, bms_##bms##_cell_23_voltage) \
@@ -220,24 +216,9 @@ class KingSongEUCCodec {
   GETTER_FIELD(uint16_t, uptime)
   GETTER_FIELD(float, voltage)
   GETTER_FIELD_BMS(1)
-  GETTER_FIELD_BMS_CELL_VOLTAGE_1_16(1)
-#if KINGSONG_EUC_CELL_COUNT > 16
-  GETTER_FIELD_BMS_CELL_VOLTAGE_17_20(1)
-#endif
-#if KINGSONG_EUC_CELL_COUNT > 20
-  GETTER_FIELD_BMS_CELL_VOLTAGE_21_30(1)
-#endif
-
-#if KINGSONG_EUC_BMS_COUNT > 1
+  GETTER_FIELD_BMS_CELL_VOLTAGE(1)
   GETTER_FIELD_BMS(2)
-  GETTER_FIELD_BMS_CELL_VOLTAGE_1_16(2)
-#if KINGSONG_EUC_CELL_COUNT > 16
-  GETTER_FIELD_BMS_CELL_VOLTAGE_17_20(2)
-#endif
-#if KINGSONG_EUC_CELL_COUNT > 20
-  GETTER_FIELD_BMS_CELL_VOLTAGE_21_30(2)
-#endif
-#endif
+  GETTER_FIELD_BMS_CELL_VOLTAGE(2)
 
   inline std::string get_error_description_(uint16_t error_code);
   std::unique_ptr<KingSongEUCCommand> get_request_(KingSongEUCCmd type, std::map<uint8_t, uint8_t> bytes);

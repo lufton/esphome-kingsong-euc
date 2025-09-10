@@ -73,8 +73,13 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
     case ESP_GATTC_DISCONNECT_EVT: {
       this->node_state = esp32_ble_tracker::ClientState::IDLE;
       this->status_set_warning("Disconnected from EUC");
-      for (KingSongEUCSensor *sensor : this->sensors_)
-        PUBLISH_STATE(sensor, NAN);
+      for (KingSongEUCBinarySensor *binary_sensor : this->binary_sensors_) binary_sensor->set_has_state(false);
+      for (KingSongEUCLock *lock : this->locks_) lock->set_has_state(false);
+      for (KingSongEUCNumber *number : this->numbers_) number->set_has_state(false);
+      for (KingSongEUCSelect *select : this->selects_) select->set_has_state(false);
+      for (KingSongEUCSensor *sensor : this->sensors_) sensor->set_has_state(false);
+      for (KingSongEUCSwitch *switch_ : this->switches_) switch_->set_has_state(false);
+      for (KingSongEUCTextSensor *text_sensor : this->text_sensors_) text_sensor->set_has_state(false);
       break;
     }
     case ESP_GATTC_SEARCH_CMPL_EVT: {
@@ -86,8 +91,11 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
         break;
       }
       this->char_handle_ = chr->handle;
-      auto status = esp_ble_gattc_register_for_notify(this->parent_->get_gattc_if(), this->parent_->get_remote_bda(),
-                                                      chr->handle);
+      auto status = esp_ble_gattc_register_for_notify(
+        this->parent_->get_gattc_if(),
+        this->parent_->get_remote_bda(),
+        chr->handle
+      );
       if (status) {
         ESP_LOGW(TAG, "esp_ble_gattc_register_for_notify failed, status=%d", status);
         this->status_set_warning("Failed to register for notifications, not a KingSong EUC..?");
@@ -240,18 +248,13 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
             case CELL_GROUP_3:
               PUBLISH_STATE(this->bms_1_cell_15_voltage_sensor_, codec->get_bms_1_cell_15_voltage());
               PUBLISH_STATE(this->bms_1_cell_16_voltage_sensor_, codec->get_bms_1_cell_16_voltage());
-#if KINGSONG_EUC_CELL_COUNT > 16
               PUBLISH_STATE(this->bms_1_cell_17_voltage_sensor_, codec->get_bms_1_cell_17_voltage());
               PUBLISH_STATE(this->bms_1_cell_18_voltage_sensor_, codec->get_bms_1_cell_18_voltage());
               PUBLISH_STATE(this->bms_1_cell_19_voltage_sensor_, codec->get_bms_1_cell_19_voltage());
               PUBLISH_STATE(this->bms_1_cell_20_voltage_sensor_, codec->get_bms_1_cell_20_voltage());
-#endif
-#if KINGSONG_EUC_CELL_COUNT > 20
               PUBLISH_STATE(this->bms_1_cell_21_voltage_sensor_, codec->get_bms_1_cell_21_voltage());
-#endif
               break;
             case CELL_GROUP_4:
-#if KINGSONG_EUC_CELL_COUNT > 20
               PUBLISH_STATE(this->bms_1_cell_22_voltage_sensor_, codec->get_bms_1_cell_22_voltage());
               PUBLISH_STATE(this->bms_1_cell_23_voltage_sensor_, codec->get_bms_1_cell_23_voltage());
               PUBLISH_STATE(this->bms_1_cell_24_voltage_sensor_, codec->get_bms_1_cell_24_voltage());
@@ -259,13 +262,10 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
               PUBLISH_STATE(this->bms_1_cell_26_voltage_sensor_, codec->get_bms_1_cell_26_voltage());
               PUBLISH_STATE(this->bms_1_cell_27_voltage_sensor_, codec->get_bms_1_cell_27_voltage());
               PUBLISH_STATE(this->bms_1_cell_28_voltage_sensor_, codec->get_bms_1_cell_28_voltage());
-#endif
               break;
             case CELL_GROUP_5:
-#if KINGSONG_EUC_CELL_COUNT > 20
               PUBLISH_STATE(this->bms_1_cell_29_voltage_sensor_, codec->get_bms_1_cell_29_voltage());
               PUBLISH_STATE(this->bms_1_cell_30_voltage_sensor_, codec->get_bms_1_cell_30_voltage());
-#endif
               break;
           }
           break;
@@ -309,18 +309,13 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
             case CELL_GROUP_3:
               PUBLISH_STATE(this->bms_2_cell_15_voltage_sensor_, codec->get_bms_2_cell_15_voltage());
               PUBLISH_STATE(this->bms_2_cell_16_voltage_sensor_, codec->get_bms_2_cell_16_voltage());
-#if KINGSONG_EUC_CELL_COUNT > 16
               PUBLISH_STATE(this->bms_2_cell_17_voltage_sensor_, codec->get_bms_2_cell_17_voltage());
               PUBLISH_STATE(this->bms_2_cell_18_voltage_sensor_, codec->get_bms_2_cell_18_voltage());
               PUBLISH_STATE(this->bms_2_cell_19_voltage_sensor_, codec->get_bms_2_cell_19_voltage());
               PUBLISH_STATE(this->bms_2_cell_20_voltage_sensor_, codec->get_bms_2_cell_20_voltage());
-#endif
-#if KINGSONG_EUC_CELL_COUNT > 20
               PUBLISH_STATE(this->bms_2_cell_21_voltage_sensor_, codec->get_bms_2_cell_21_voltage());
-#endif
               break;
             case CELL_GROUP_4:
-#if KINGSONG_EUC_CELL_COUNT > 20
               PUBLISH_STATE(this->bms_2_cell_22_voltage_sensor_, codec->get_bms_2_cell_22_voltage());
               PUBLISH_STATE(this->bms_2_cell_23_voltage_sensor_, codec->get_bms_2_cell_23_voltage());
               PUBLISH_STATE(this->bms_2_cell_24_voltage_sensor_, codec->get_bms_2_cell_24_voltage());
@@ -328,13 +323,10 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
               PUBLISH_STATE(this->bms_2_cell_26_voltage_sensor_, codec->get_bms_2_cell_26_voltage());
               PUBLISH_STATE(this->bms_2_cell_27_voltage_sensor_, codec->get_bms_2_cell_27_voltage());
               PUBLISH_STATE(this->bms_2_cell_28_voltage_sensor_, codec->get_bms_2_cell_28_voltage());
-#endif
               break;
             case CELL_GROUP_5:
-#if KINGSONG_EUC_CELL_COUNT > 20
               PUBLISH_STATE(this->bms_2_cell_29_voltage_sensor_, codec->get_bms_2_cell_29_voltage());
               PUBLISH_STATE(this->bms_2_cell_30_voltage_sensor_, codec->get_bms_2_cell_30_voltage());
-#endif
               break;
           }
           break;

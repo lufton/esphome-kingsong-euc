@@ -22,15 +22,14 @@ class KingSongEUCBaseEntity : public Parented<KingSongEUCClient>, public Polling
 
   void dump_config() override {}
   virtual bool has_state() { return this->last_updated_ > 0; }
-  bool is_connected() { return this->parent_->node_state == esp32_ble_tracker::ClientState::ESTABLISHED; }
   bool is_report_expired() {
     return this->last_reported_ == 0 ||
            (this->report_interval_ != SCHEDULER_DONT_RUN && millis() - this->last_reported_ > this->report_interval_);
   }
-  bool is_report_possible() { return millis() - this->parent_->get_last_reported() > REPORT_INTERVAL; }
+  bool is_report_possible() { return millis() - this->get_parent()->get_last_reported() > REPORT_INTERVAL; }
   bool is_request_expired() { return millis() - this->last_requested_ > RESPONSE_TIMEOUT; }
   bool is_request_possible() {
-    return is_connected() && millis() - this->parent_->get_last_requested() > REQUEST_INTERVAL;
+    return this->get_parent()->parent()->connected() && millis() - this->get_parent()->get_last_requested() > REQUEST_INTERVAL;
   }
   bool is_update_expired() {
     return this->last_updated_ == 0 || (this->update_interval_ != SCHEDULER_DONT_RUN && this->update_interval_ != 0 &&
@@ -40,14 +39,14 @@ class KingSongEUCBaseEntity : public Parented<KingSongEUCClient>, public Polling
   void just_requested() { this->last_requested_ = millis(); }
   void just_updated() { this->last_updated_ = millis(); }
   void loop() override {
-    if (!this->is_connected() && this->last_updated_ > 0)
+    if (!this->get_parent()->parent()->connected() && this->last_updated_ > 0)
       this->last_updated_ = 0;
     if (this->has_state() && this->is_report_expired() && this->is_report_possible())
       this->report_state();
     if (this->is_update_expired() && this->is_request_expired() && this->is_request_possible()) {
       this->request_state();
       this->just_requested();
-      this->parent_->just_requested();
+      this->get_parent()->just_requested();
     }
   }
   virtual void report_state() { this->just_reported(); }

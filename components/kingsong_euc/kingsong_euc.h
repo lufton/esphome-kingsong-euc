@@ -39,7 +39,7 @@ namespace kingsong_euc {
   REGISTER_SENSOR(bms_##bms##_temperature_6) \
   REGISTER_SENSOR(bms_##bms##_mosfet_temperature)
 
-#define REGISTER_BMS_CELL_VOLTAGE_SENSORS_1_16(bms) \
+#define REGISTER_BMS_CELL_VOLTAGE_SENSORS(bms) \
   REGISTER_SENSOR(bms_##bms##_cell_1_voltage) \
   REGISTER_SENSOR(bms_##bms##_cell_2_voltage) \
   REGISTER_SENSOR(bms_##bms##_cell_3_voltage) \
@@ -55,15 +55,11 @@ namespace kingsong_euc {
   REGISTER_SENSOR(bms_##bms##_cell_13_voltage) \
   REGISTER_SENSOR(bms_##bms##_cell_14_voltage) \
   REGISTER_SENSOR(bms_##bms##_cell_15_voltage) \
-  REGISTER_SENSOR(bms_##bms##_cell_16_voltage)
-
-#define REGISTER_BMS_CELL_VOLTAGE_SENSORS_17_20(bms) \
+  REGISTER_SENSOR(bms_##bms##_cell_16_voltage) \
   REGISTER_SENSOR(bms_##bms##_cell_17_voltage) \
   REGISTER_SENSOR(bms_##bms##_cell_18_voltage) \
   REGISTER_SENSOR(bms_##bms##_cell_19_voltage) \
-  REGISTER_SENSOR(bms_##bms##_cell_20_voltage)
-
-#define REGISTER_BMS_CELL_VOLTAGE_SENSORS_21_30(bms) \
+  REGISTER_SENSOR(bms_##bms##_cell_20_voltage) \
   REGISTER_SENSOR(bms_##bms##_cell_21_voltage) \
   REGISTER_SENSOR(bms_##bms##_cell_22_voltage) \
   REGISTER_SENSOR(bms_##bms##_cell_23_voltage) \
@@ -137,24 +133,9 @@ class KingSongEUC : public KingSongEUCClient, public Component {
   REGISTER_TEXT_SENSOR(serial_number)
 
   REGISTER_BMS_SENSORS(1)
-  REGISTER_BMS_CELL_VOLTAGE_SENSORS_1_16(1)
-#if KINGSONG_EUC_CELL_COUNT > 16
-  REGISTER_BMS_CELL_VOLTAGE_SENSORS_17_20(1)
-#endif
-#if KINGSONG_EUC_CELL_COUNT > 20
-  REGISTER_BMS_CELL_VOLTAGE_SENSORS_21_30(1)
-#endif
-
-#if KINGSONG_EUC_BMS_COUNT > 1
+  REGISTER_BMS_CELL_VOLTAGE_SENSORS(1)
   REGISTER_BMS_SENSORS(2)
-  REGISTER_BMS_CELL_VOLTAGE_SENSORS_1_16(2)
-#if KINGSONG_EUC_CELL_COUNT > 16
-  REGISTER_BMS_CELL_VOLTAGE_SENSORS_17_20(2)
-#endif
-#if KINGSONG_EUC_CELL_COUNT > 20
-  REGISTER_BMS_CELL_VOLTAGE_SENSORS_21_30(2)
-#endif
-#endif
+  REGISTER_BMS_CELL_VOLTAGE_SENSORS(2)
 
  protected:
   std::vector<KingSongEUCBinarySensor *> binary_sensors_;

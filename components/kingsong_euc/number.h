@@ -76,7 +76,7 @@ class KingSongEUCNumber : public number::Number, public KingSongEUCBaseEntity {
   KingSongEUCNumberType number_type_;
 
   void control(float value) {
-    if (!this->is_connected())
+    if (!this->get_parent()->parent()->connected())
       return;
     if (this->number_type_ == KingSongEUCNumberType::COMMAND) {
         uint8_t command = static_cast<uint8_t>(std::round(value));

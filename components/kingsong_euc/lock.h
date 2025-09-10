@@ -59,7 +59,7 @@ class KingSongEUCLock : public lock::Lock, public KingSongEUCBaseEntity {
   KingSongEUCLockType lock_type_;
 
   void control(const lock::LockCall &call) {
-    if (!this->is_connected())
+    if (!this->get_parent()->parent()->connected())
       return;
     lock::LockState state = *call.get_state();
     this->publish_state(state);

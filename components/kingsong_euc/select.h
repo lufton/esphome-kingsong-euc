@@ -76,7 +76,7 @@ class KingSongEUCSelect : public select::Select, public KingSongEUCBaseEntity {
   KingSongEUCSelectType select_type_;
 
   void control(const std::string &value) override {
-    if (!this->is_connected())
+    if (!this->get_parent()->parent()->connected())
       return;
     auto index = this->index_of(value);
     if (!index.has_value())

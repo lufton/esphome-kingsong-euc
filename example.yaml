@@ -85,37 +85,35 @@ select:
 
 sensor:
   - platform: kingsong_euc
-    bms_count: 2
-    cell_count: 30
-    bms_cell_voltage:
-      name: BMS cell voltage
-    bms_current:
-      name: BMS current
+    bms_1_cell_1_voltage:
+      name: BMS 1 cell 1 voltage
+    bms_1_current:
+      name: BMS 1 current
       hysteresis: 0.1
-    bms_factory_capacity:
-      name: BMS factory capacity
-    bms_full_cycles:
-      name: BMS full cycles
-    bms_mosfet_temperature:
-      name: BMS mosfet temperature
-    bms_remaining_capacity:
-      name: BMS remaining capacity
-    bms_soc:
-      name: BMS SoC
-    bms_temperature_1:
-      name: BMS temperature 1
-    bms_temperature_2:
-      name: BMS temperature 2
-    bms_temperature_3:
-      name: BMS temperature 3
-    bms_temperature_4:
-      name: BMS temperature 4
-    bms_temperature_5:
-      name: BMS temperature 5
-    bms_temperature_6:
-      name: BMS temperature 6
-    bms_voltage:
-      name: BMS voltage
+    bms_1_factory_capacity:
+      name: BMS 1 factory capacity
+    bms_1_full_cycles:
+      name: BMS 1 full cycles
+    bms_1_mosfet_temperature:
+      name: BMS 1 mosfet temperature
+    bms_1_remaining_capacity:
+      name: BMS 1 remaining capacity
+    bms_1_soc:
+      name: BMS 1 SoC
+    bms_1_temperature_1:
+      name: BMS 1 temperature 1
+    bms_1_temperature_2:
+      name: BMS 1 temperature 2
+    bms_1_temperature_3:
+      name: BMS 1 temperature 3
+    bms_1_temperature_4:
+      name: BMS 1 temperature 4
+    bms_1_temperature_5:
+      name: BMS 1 temperature 5
+    bms_1_temperature_6:
+      name: BMS 1 temperature 6
+    bms_1_voltage:
+      name: BMS 1 voltage
       hysteresis: 0.1
     current:
       name: Current
@@ -173,13 +171,12 @@ switch:
 
 text_sensor:
   - platform: kingsong_euc
-    bms_count: 2
-    bms_firmware:
-      name: BMS firmware
-    bms_manufacture_date:
-      name: BMS manufacture date
-    bms_serial:
-      name: BMS serial
+    bms_1_firmware:
+      name: BMS 1 firmware
+    bms_1_manufacture_date:
+      name: BMS 1 manufacture date
+    bms_1_serial:
+      name: BMS 1 serial
     charging_status:
       name: Charging status
     error_description:

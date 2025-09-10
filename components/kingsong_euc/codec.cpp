@@ -238,18 +238,13 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
         case CELL_GROUP_3:
           this->set_bms_1_cell_15_voltage(this->get_word(2) / 1000.0f);
           this->set_bms_1_cell_16_voltage(this->get_word(4) / 1000.0f);
-#if KINGSONG_EUC_CELL_COUNT > 16
           this->set_bms_1_cell_17_voltage(this->get_word(6) / 1000.0f);
           this->set_bms_1_cell_18_voltage(this->get_word(8) / 1000.0f);
           this->set_bms_1_cell_19_voltage(this->get_word(10) / 1000.0f);
           this->set_bms_1_cell_20_voltage(this->get_word(12) / 1000.0f);
-#endif
-#if KINGSONG_EUC_CELL_COUNT > 20
           this->set_bms_1_cell_21_voltage(this->get_word(14) / 1000.0f);
-#endif
           break;
         case CELL_GROUP_4:
-#if KINGSONG_EUC_CELL_COUNT > 20
           this->set_bms_1_cell_22_voltage(this->get_word(2) / 1000.0f);
           this->set_bms_1_cell_23_voltage(this->get_word(4) / 1000.0f);
           this->set_bms_1_cell_24_voltage(this->get_word(6) / 1000.0f);
@@ -257,13 +252,10 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
           this->set_bms_1_cell_26_voltage(this->get_word(10) / 1000.0f);
           this->set_bms_1_cell_27_voltage(this->get_word(12) / 1000.0f);
           this->set_bms_1_cell_28_voltage(this->get_word(14) / 1000.0f);
-#endif
           break;
         case CELL_GROUP_5:
-#if KINGSONG_EUC_CELL_COUNT > 20
           this->set_bms_1_cell_29_voltage(this->get_word(2) / 1000.0f);
           this->set_bms_1_cell_30_voltage(this->get_word(4) / 1000.0f);
-#endif
           break;
       }
       break;
@@ -307,18 +299,13 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
         case CELL_GROUP_3:
           this->set_bms_2_cell_15_voltage(this->get_word(2) / 1000.0f);
           this->set_bms_2_cell_16_voltage(this->get_word(4) / 1000.0f);
-#if KINGSONG_EUC_CELL_COUNT > 16
           this->set_bms_2_cell_17_voltage(this->get_word(6) / 1000.0f);
           this->set_bms_2_cell_18_voltage(this->get_word(8) / 1000.0f);
           this->set_bms_2_cell_19_voltage(this->get_word(10) / 1000.0f);
           this->set_bms_2_cell_20_voltage(this->get_word(12) / 1000.0f);
-#endif
-#if KINGSONG_EUC_CELL_COUNT > 20
           this->set_bms_2_cell_21_voltage(this->get_word(14) / 1000.0f);
-#endif
           break;
         case CELL_GROUP_4:
-#if KINGSONG_EUC_CELL_COUNT > 20
           this->set_bms_2_cell_22_voltage(this->get_word(2) / 1000.0f);
           this->set_bms_2_cell_23_voltage(this->get_word(4) / 1000.0f);
           this->set_bms_2_cell_24_voltage(this->get_word(6) / 1000.0f);
@@ -326,13 +313,10 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
           this->set_bms_2_cell_26_voltage(this->get_word(10) / 1000.0f);
           this->set_bms_2_cell_27_voltage(this->get_word(12) / 1000.0f);
           this->set_bms_2_cell_28_voltage(this->get_word(14) / 1000.0f);
-#endif
           break;
         case CELL_GROUP_5:
-#if KINGSONG_EUC_CELL_COUNT > 20
           this->set_bms_2_cell_29_voltage(this->get_word(2) / 1000.0f);
           this->set_bms_2_cell_30_voltage(this->get_word(4) / 1000.0f);
-#endif
           break;
       }
       break;

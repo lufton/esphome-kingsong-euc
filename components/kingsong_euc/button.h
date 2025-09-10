@@ -38,7 +38,7 @@ class KingSongEUCButton : public button::Button, public KingSongEUCBaseEntity {
   KingSongEUCButtonType button_type_;
 
   void press_action() {
-    if (!this->is_connected())
+    if (!this->get_parent()->parent()->connected())
       return;
     switch (this->button_type_) {
       case KingSongEUCButtonType::BEEP:
