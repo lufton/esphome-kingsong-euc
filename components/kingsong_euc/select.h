@@ -42,8 +42,8 @@ class KingSongEUCSelect : public select::Select, public KingSongEUCBaseEntity {
   }
 
   void publish_state(const std::string &state) {
-    const std::string prev_state = this->state;
-    this->state = state;
+    const std::string prev_state = this->current_option();
+    this->control(state);
     this->set_has_state(true);
     this->just_updated();
     if (state != prev_state)
@@ -51,7 +51,7 @@ class KingSongEUCSelect : public select::Select, public KingSongEUCBaseEntity {
   }
 
   void report_state() override {
-    select::Select::publish_state(this->state);
+    select::Select::publish_state(this->current_option());
     this->just_reported();
   }
 
