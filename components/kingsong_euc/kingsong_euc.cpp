@@ -359,7 +359,6 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
               break;
           }
 #endif  // KINGSONG_EUC_BMS_COUNT > 1
-#endif  // KINGSONG_EUC_BMS_COUNT > 1
           break;
         case PKT_F5:  // 245
           PUBLISH_STATE(this->phase_short_circuit_binary_sensor_, codec->get_phase_short_circuit());
