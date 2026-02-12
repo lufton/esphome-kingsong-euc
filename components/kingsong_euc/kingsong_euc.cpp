@@ -73,8 +73,13 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
     case ESP_GATTC_DISCONNECT_EVT: {
       this->node_state = esp32_ble_tracker::ClientState::IDLE;
       this->status_set_warning("Disconnected from EUC");
-      for (KingSongEUCSensor *sensor : this->sensors_)
-        PUBLISH_STATE(sensor, NAN);
+      for (KingSongEUCBinarySensor *binary_sensor : this->binary_sensors_) binary_sensor->set_has_state(false);
+      for (KingSongEUCLock *lock : this->locks_) lock->set_has_state(false);
+      for (KingSongEUCNumber *number : this->numbers_) number->set_has_state(false);
+      for (KingSongEUCSelect *select : this->selects_) select->set_has_state(false);
+      for (KingSongEUCSensor *sensor : this->sensors_) sensor->set_has_state(false);
+      for (KingSongEUCSwitch *switch_ : this->switches_) switch_->set_has_state(false);
+      for (KingSongEUCTextSensor *text_sensor : this->text_sensors_) text_sensor->set_has_state(false);
       break;
     }
     case ESP_GATTC_SEARCH_CMPL_EVT: {
@@ -158,8 +163,8 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
             PUBLISH_STATE(this->ride_mode_select_, ride_mode_options[codec->get_ride_mode()]);
           PUBLISH_STATE(this->power_sensor_, codec->get_power());
           break;
-        case PKT_SERIAL:  // 179
-          PUBLISH_STATE(this->serial_text_sensor_, codec->get_serial());
+        case PKT_SERIAL_NUMBER:  // 179
+          PUBLISH_STATE(this->serial_number_text_sensor_, codec->get_serial_number());
           break;
         case PKT_ALARMS:  // 181
           PUBLISH_STATE(this->alarm_1_number_, codec->get_alarm_1());
@@ -183,37 +188,25 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
         case PKT_MODEL:  // 187
           PUBLISH_STATE(this->model_text_sensor_, codec->get_model());
           break;
-#if KINGSONG_EUC_BMS_COUNT > 0
-        case PKT_BMS1_SERIAL:  // 225
-          PUBLISH_STATE(this->bms_1_serial_text_sensor_, codec->get_bms_1_serial());
+        case PKT_BMS1_SERIAL_NUMBER:  // 225
+          PUBLISH_STATE(this->bms_1_serial_number_text_sensor_, codec->get_bms_1_serial_number());
           break;
-#endif
-
-#if KINGSONG_EUC_BMS_COUNT > 1
-        case PKT_BMS2_SERIAL:  // 226
-          PUBLISH_STATE(this->bms_2_serial_text_sensor_, codec->get_bms_2_serial());
+        case PKT_BMS2_SERIAL_NUMBER:  // 226
+          PUBLISH_STATE(this->bms_2_serial_number_text_sensor_, codec->get_bms_2_serial_number());
           break;
-#endif
         case PKT_BMS1_MANUFACTURE_DATE:  // 227
-#if KINGSONG_EUC_BMS_COUNT > 0
           PUBLISH_STATE(this->bms_1_manufacture_date_text_sensor_, codec->get_bms_1_manufacture_date());
-#endif
           break;
-#if KINGSONG_EUC_BMS_COUNT > 1
         case PKT_BMS2_MANUFACTURE_DATE:  // 228
           PUBLISH_STATE(this->bms_2_manufacture_date_text_sensor_, codec->get_bms_2_manufacture_date());
           break;
-#endif
         case PKT_BMS1_FIRMWARE:  // 229
           PUBLISH_STATE(this->bms_1_firmware_text_sensor_, codec->get_bms_1_firmware());
           break;
-#if KINGSONG_EUC_BMS_COUNT > 1
         case PKT_BMS2_FIRMWARE:  // 230
           PUBLISH_STATE(this->bms_2_firmware_text_sensor_, codec->get_bms_2_firmware());
           break;
-#endif
         case PKT_BMS1:  // 241
-#if KINGSONG_EUC_BMS_COUNT > 0
           switch (codec->get_bms_packet()) {
             case GENERAL:
               PUBLISH_STATE(this->bms_1_voltage_sensor_, codec->get_bms_1_voltage());
@@ -253,18 +246,13 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
             case CELL_GROUP_3:
               PUBLISH_STATE(this->bms_1_cell_15_voltage_sensor_, codec->get_bms_1_cell_15_voltage());
               PUBLISH_STATE(this->bms_1_cell_16_voltage_sensor_, codec->get_bms_1_cell_16_voltage());
-#if KINGSONG_EUC_CELL_COUNT > 16
               PUBLISH_STATE(this->bms_1_cell_17_voltage_sensor_, codec->get_bms_1_cell_17_voltage());
               PUBLISH_STATE(this->bms_1_cell_18_voltage_sensor_, codec->get_bms_1_cell_18_voltage());
               PUBLISH_STATE(this->bms_1_cell_19_voltage_sensor_, codec->get_bms_1_cell_19_voltage());
               PUBLISH_STATE(this->bms_1_cell_20_voltage_sensor_, codec->get_bms_1_cell_20_voltage());
-#endif
-#if KINGSONG_EUC_CELL_COUNT > 20
               PUBLISH_STATE(this->bms_1_cell_21_voltage_sensor_, codec->get_bms_1_cell_21_voltage());
-#endif
               break;
             case CELL_GROUP_4:
-#if KINGSONG_EUC_CELL_COUNT > 20
               PUBLISH_STATE(this->bms_1_cell_22_voltage_sensor_, codec->get_bms_1_cell_22_voltage());
               PUBLISH_STATE(this->bms_1_cell_23_voltage_sensor_, codec->get_bms_1_cell_23_voltage());
               PUBLISH_STATE(this->bms_1_cell_24_voltage_sensor_, codec->get_bms_1_cell_24_voltage());
@@ -272,19 +260,14 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
               PUBLISH_STATE(this->bms_1_cell_26_voltage_sensor_, codec->get_bms_1_cell_26_voltage());
               PUBLISH_STATE(this->bms_1_cell_27_voltage_sensor_, codec->get_bms_1_cell_27_voltage());
               PUBLISH_STATE(this->bms_1_cell_28_voltage_sensor_, codec->get_bms_1_cell_28_voltage());
-#endif
               break;
             case CELL_GROUP_5:
-#if KINGSONG_EUC_CELL_COUNT > 20
               PUBLISH_STATE(this->bms_1_cell_29_voltage_sensor_, codec->get_bms_1_cell_29_voltage());
               PUBLISH_STATE(this->bms_1_cell_30_voltage_sensor_, codec->get_bms_1_cell_30_voltage());
-#endif
               break;
           }
-#endif
           break;
         case PKT_BMS2:  // 242
-#if KINGSONG_EUC_BMS_COUNT > 1
           switch (codec->get_bms_packet()) {
             case GENERAL:
               PUBLISH_STATE(this->bms_2_voltage_sensor_, codec->get_bms_2_voltage());
@@ -324,18 +307,13 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
             case CELL_GROUP_3:
               PUBLISH_STATE(this->bms_2_cell_15_voltage_sensor_, codec->get_bms_2_cell_15_voltage());
               PUBLISH_STATE(this->bms_2_cell_16_voltage_sensor_, codec->get_bms_2_cell_16_voltage());
-#if KINGSONG_EUC_CELL_COUNT > 16
               PUBLISH_STATE(this->bms_2_cell_17_voltage_sensor_, codec->get_bms_2_cell_17_voltage());
               PUBLISH_STATE(this->bms_2_cell_18_voltage_sensor_, codec->get_bms_2_cell_18_voltage());
               PUBLISH_STATE(this->bms_2_cell_19_voltage_sensor_, codec->get_bms_2_cell_19_voltage());
               PUBLISH_STATE(this->bms_2_cell_20_voltage_sensor_, codec->get_bms_2_cell_20_voltage());
-#endif
-#if KINGSONG_EUC_CELL_COUNT > 20
               PUBLISH_STATE(this->bms_2_cell_21_voltage_sensor_, codec->get_bms_2_cell_21_voltage());
-#endif
               break;
             case CELL_GROUP_4:
-#if KINGSONG_EUC_CELL_COUNT > 20
               PUBLISH_STATE(this->bms_2_cell_22_voltage_sensor_, codec->get_bms_2_cell_22_voltage());
               PUBLISH_STATE(this->bms_2_cell_23_voltage_sensor_, codec->get_bms_2_cell_23_voltage());
               PUBLISH_STATE(this->bms_2_cell_24_voltage_sensor_, codec->get_bms_2_cell_24_voltage());
@@ -343,16 +321,12 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
               PUBLISH_STATE(this->bms_2_cell_26_voltage_sensor_, codec->get_bms_2_cell_26_voltage());
               PUBLISH_STATE(this->bms_2_cell_27_voltage_sensor_, codec->get_bms_2_cell_27_voltage());
               PUBLISH_STATE(this->bms_2_cell_28_voltage_sensor_, codec->get_bms_2_cell_28_voltage());
-#endif
               break;
             case CELL_GROUP_5:
-#if KINGSONG_EUC_CELL_COUNT > 20
               PUBLISH_STATE(this->bms_2_cell_29_voltage_sensor_, codec->get_bms_2_cell_29_voltage());
               PUBLISH_STATE(this->bms_2_cell_30_voltage_sensor_, codec->get_bms_2_cell_30_voltage());
-#endif
               break;
           }
-#endif  // KINGSONG_EUC_BMS_COUNT > 1
           break;
         case PKT_F5:  // 245
           PUBLISH_STATE(this->phase_short_circuit_binary_sensor_, codec->get_phase_short_circuit());

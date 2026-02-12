@@ -52,7 +52,7 @@ class KingSongEUCSwitch : public switch_::Switch, public KingSongEUCBaseEntity {
   }
 
   void request_state() override {
-    if (!this->is_connected())
+    if (!this->get_parent()->parent()->connected())
       return;
     switch (this->switch_type_) {
       case KingSongEUCSwitchType::CIRCLE_LIGHT:
@@ -81,7 +81,7 @@ class KingSongEUCSwitch : public switch_::Switch, public KingSongEUCBaseEntity {
   KingSongEUCSwitchType switch_type_;
 
   void write_state(bool state) {
-    if (!this->is_connected())
+    if (!this->get_parent()->parent()->connected())
       return;
     switch (this->switch_type_) {
       case KingSongEUCSwitchType::CIRCLE_LIGHT:

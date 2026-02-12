@@ -25,7 +25,7 @@ enum KingSongEUCCmd : uint8_t {
   CMD_GET_MUSIC_BLUETOOTH = 0x57,         // 87
   CMD_LOCK = 0x5D,                        // 93
   CMD_GET_LOCK = 0x5E,                    // 94
-  CMD_GET_SERIAL = 0x63,                  // 99
+  CMD_GET_SERIAL_NUMBER = 0x63,           // 99
   CMD_FACTORY_RESET = 0x65,               // 101
   CMD_FACTORY_RESET_A = 0x66,             // 102
   CMD_SET_TEST_MODE = 0x67,               // 103
@@ -55,8 +55,8 @@ enum KingSongEUCCmd : uint8_t {
   CMD_GET_ALARMS_PASS = 0x99,             // 153
   CMD_SET_ALARMS_PASS = 0X9A,             // 154
   CMD_GET_MODEL = 0x9B,                   // 155
-  CMD_GET_BMS_1_SERIAL = 0xE1,            // 225
-  CMD_GET_BMS_2_SERIAL = 0xE2,            // 226
+  CMD_GET_BMS_1_SERIAL_NUMBER = 0xE1,     // 225
+  CMD_GET_BMS_2_SERIAL_NUMBER = 0xE2,     // 226
   CMD_GET_BMS_1_MANUFACTURE_DATE = 0xE3,  // 227
   CMD_GET_BMS_2_MANUFACTURE_DATE = 0xE4,  // 228
   CMD_GET_BMS_1_FIRMWARE = 0xE5,          // 229
@@ -75,13 +75,13 @@ enum KingSongEUCPkt : uint8_t {
   PKT_VOICE_LANGUAGE = 0x6B,         // 107
   PKT_CIRCLE_LIGHT = 0x6E,           // 110
   PKT_A9 = 0xA9,                     // 169
-  PKT_SERIAL = 0xB3,                 // 179
+  PKT_SERIAL_NUMBER = 0xB3,          // 179
   PKT_ALARMS = 0xB5,                 // 181
   PKT_B9 = 0xB9,                     // 185
   PKT_MODEL = 0xBB,                  // 187
   PKT_C9 = 0xC9,                     // 201
-  PKT_BMS1_SERIAL = 0xE1,            // 225
-  PKT_BMS2_SERIAL = 0xE2,            // 226
+  PKT_BMS1_SERIAL_NUMBER = 0xE1,     // 225
+  PKT_BMS2_SERIAL_NUMBER = 0xE2,     // 226
   PKT_BMS1_MANUFACTURE_DATE = 0xE3,  // 227
   PKT_BMS2_MANUFACTURE_DATE = 0xE4,  // 228
   PKT_BMS1_FIRMWARE = 0xE5,          // 229

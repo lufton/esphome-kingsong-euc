@@ -42,8 +42,10 @@ class KingSongEUCSelect : public select::Select, public KingSongEUCBaseEntity {
   }
 
   void publish_state(const std::string &state) {
-    const std::string prev_state = this->state;
-    this->state = state;
+    const std::string prev_state = this->current_option();
+    optional<size_t> index = this->index_of(state);
+    if (!index.has_value()) return;
+    this->active_index_ = index.value();
     this->set_has_state(true);
     this->just_updated();
     if (state != prev_state)
@@ -51,7 +53,7 @@ class KingSongEUCSelect : public select::Select, public KingSongEUCBaseEntity {
   }
 
   void report_state() override {
-    select::Select::publish_state(this->state);
+    select::Select::publish_state(this->current_option());
     this->just_reported();
   }
 
@@ -76,11 +78,12 @@ class KingSongEUCSelect : public select::Select, public KingSongEUCBaseEntity {
   KingSongEUCSelectType select_type_;
 
   void control(const std::string &value) override {
-    if (!this->is_connected())
+    if (!this->get_parent()->parent()->connected())
       return;
     auto index = this->index_of(value);
     if (!index.has_value())
       return;
+    this->publish_state(value);
     switch (this->select_type_) {
       case KingSongEUCSelectType::MAGIC_LIGHT_MODE:
         return this->get_parent()->set_magic_light_mode(index.value());

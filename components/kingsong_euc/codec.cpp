@@ -155,8 +155,8 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
       this->set_ride_mode(this->get_byte(14));
       this->set_power(this->voltage_ * this->current_);
       break;
-    case PKT_SERIAL:  // 179
-      this->set_serial(this->get_string());
+    case PKT_SERIAL_NUMBER:  // 179
+      this->set_serial_number(this->get_string());
       break;
     case PKT_ALARMS:  // 181
       this->set_alarm_1(this->get_word(4));
@@ -177,40 +177,27 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
     case PKT_MODEL:  // 187
       this->set_model(this->get_string());
       break;
-#if KINGSONG_EUC_BMS_COUNT > 0
-    case PKT_BMS1_SERIAL:  // 225
-      this->set_bms_1_serial(this->get_string());
+    case PKT_BMS1_SERIAL_NUMBER:  // 225
+      this->set_bms_1_serial_number(this->get_string());
       break;
-#endif
-#if KINGSONG_EUC_BMS_COUNT > 1
-    case PKT_BMS2_SERIAL:  // 226
-      this->set_bms_2_serial(this->get_string());
+    case PKT_BMS2_SERIAL_NUMBER:  // 226
+      this->set_bms_2_serial_number(this->get_string());
       break;
-#endif
-#if KINGSONG_EUC_BMS_COUNT > 0
     case PKT_BMS1_MANUFACTURE_DATE:  // 227
       this->set_bms_1_manufacture_date(this->get_string());
       break;
-#endif
-#if KINGSONG_EUC_BMS_COUNT > 1
     case PKT_BMS2_MANUFACTURE_DATE:  // 228
       this->set_bms_2_manufacture_date(this->get_string());
       break;
-#endif
-#if KINGSONG_EUC_BMS_COUNT > 0
     case PKT_BMS1_FIRMWARE:  // 229
       this->set_bms_1_firmware(this->get_string());
       break;
-#endif
-#if KINGSONG_EUC_BMS_COUNT > 1
     case PKT_BMS2_FIRMWARE:  // 230
       this->set_bms_2_firmware(this->get_string());
       break;
-#endif
     case PKT_ALARMS_PASS:  // 231
       this->set_alarms_pass(this->get_string().length() == 6 ? this->get_string() : "");
       break;
-#if KINGSONG_EUC_BMS_COUNT > 0
     case PKT_BMS1:  // 241
       switch (this->get_bms_packet()) {
         case GENERAL:
@@ -251,18 +238,13 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
         case CELL_GROUP_3:
           this->set_bms_1_cell_15_voltage(this->get_word(2) / 1000.0f);
           this->set_bms_1_cell_16_voltage(this->get_word(4) / 1000.0f);
-#if KINGSONG_EUC_CELL_COUNT > 16
           this->set_bms_1_cell_17_voltage(this->get_word(6) / 1000.0f);
           this->set_bms_1_cell_18_voltage(this->get_word(8) / 1000.0f);
           this->set_bms_1_cell_19_voltage(this->get_word(10) / 1000.0f);
           this->set_bms_1_cell_20_voltage(this->get_word(12) / 1000.0f);
-#endif
-#if KINGSONG_EUC_CELL_COUNT > 20
           this->set_bms_1_cell_21_voltage(this->get_word(14) / 1000.0f);
-#endif
           break;
         case CELL_GROUP_4:
-#if KINGSONG_EUC_CELL_COUNT > 20
           this->set_bms_1_cell_22_voltage(this->get_word(2) / 1000.0f);
           this->set_bms_1_cell_23_voltage(this->get_word(4) / 1000.0f);
           this->set_bms_1_cell_24_voltage(this->get_word(6) / 1000.0f);
@@ -270,18 +252,13 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
           this->set_bms_1_cell_26_voltage(this->get_word(10) / 1000.0f);
           this->set_bms_1_cell_27_voltage(this->get_word(12) / 1000.0f);
           this->set_bms_1_cell_28_voltage(this->get_word(14) / 1000.0f);
-#endif
           break;
         case CELL_GROUP_5:
-#if KINGSONG_EUC_CELL_COUNT > 20
           this->set_bms_1_cell_29_voltage(this->get_word(2) / 1000.0f);
           this->set_bms_1_cell_30_voltage(this->get_word(4) / 1000.0f);
-#endif
           break;
       }
       break;
-#endif  // KINGSONG_EUC_BMS_COUNT > 0
-#if KINGSONG_EUC_BMS_COUNT > 1
     case PKT_BMS2:  // 242
       switch (this->get_bms_packet()) {
         case GENERAL:
@@ -322,18 +299,13 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
         case CELL_GROUP_3:
           this->set_bms_2_cell_15_voltage(this->get_word(2) / 1000.0f);
           this->set_bms_2_cell_16_voltage(this->get_word(4) / 1000.0f);
-#if KINGSONG_EUC_CELL_COUNT > 16
           this->set_bms_2_cell_17_voltage(this->get_word(6) / 1000.0f);
           this->set_bms_2_cell_18_voltage(this->get_word(8) / 1000.0f);
           this->set_bms_2_cell_19_voltage(this->get_word(10) / 1000.0f);
           this->set_bms_2_cell_20_voltage(this->get_word(12) / 1000.0f);
-#endif
-#if KINGSONG_EUC_CELL_COUNT > 20
           this->set_bms_2_cell_21_voltage(this->get_word(14) / 1000.0f);
-#endif
           break;
         case CELL_GROUP_4:
-#if KINGSONG_EUC_CELL_COUNT > 20
           this->set_bms_2_cell_22_voltage(this->get_word(2) / 1000.0f);
           this->set_bms_2_cell_23_voltage(this->get_word(4) / 1000.0f);
           this->set_bms_2_cell_24_voltage(this->get_word(6) / 1000.0f);
@@ -341,17 +313,13 @@ void KingSongEUCCodec::save_buffer(uint8_t *buffer) {
           this->set_bms_2_cell_26_voltage(this->get_word(10) / 1000.0f);
           this->set_bms_2_cell_27_voltage(this->get_word(12) / 1000.0f);
           this->set_bms_2_cell_28_voltage(this->get_word(14) / 1000.0f);
-#endif
           break;
         case CELL_GROUP_5:
-#if KINGSONG_EUC_CELL_COUNT > 20
           this->set_bms_2_cell_29_voltage(this->get_word(2) / 1000.0f);
           this->set_bms_2_cell_30_voltage(this->get_word(4) / 1000.0f);
-#endif
           break;
       }
       break;
-#endif  // KINGSONG_EUC_BMS_COUNT > 1
     case PKT_F5:  // 245
       this->set_phase_short_circuit(this->get_byte(6) > 0);
       this->set_gyroscope_error(this->get_byte(7) > 0);

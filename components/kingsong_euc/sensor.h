@@ -21,20 +21,92 @@ namespace kingsong_euc {
   }
 
 enum class KingSongEUCSensorType {
-  BMS_CELL_VOLTAGE,
-  BMS_CURRENT,
-  BMS_FACTORY_CAPACITY,
-  BMS_FULL_CYCLES,
-  BMS_MOSFET_TEMPERATURE,
-  BMS_REMAINING_CAPACITY,
-  BMS_SOC,
-  BMS_TEMPERATURE_1,
-  BMS_TEMPERATURE_2,
-  BMS_TEMPERATURE_3,
-  BMS_TEMPERATURE_4,
-  BMS_TEMPERATURE_5,
-  BMS_TEMPERATURE_6,
-  BMS_VOLTAGE,
+  BMS_1_CELL_1_VOLTAGE,
+  BMS_2_CELL_1_VOLTAGE,
+  BMS_1_CELL_2_VOLTAGE,
+  BMS_2_CELL_2_VOLTAGE,
+  BMS_1_CELL_3_VOLTAGE,
+  BMS_2_CELL_3_VOLTAGE,
+  BMS_1_CELL_4_VOLTAGE,
+  BMS_2_CELL_4_VOLTAGE,
+  BMS_1_CELL_5_VOLTAGE,
+  BMS_2_CELL_5_VOLTAGE,
+  BMS_1_CELL_6_VOLTAGE,
+  BMS_2_CELL_6_VOLTAGE,
+  BMS_1_CELL_7_VOLTAGE,
+  BMS_2_CELL_7_VOLTAGE,
+  BMS_1_CELL_8_VOLTAGE,
+  BMS_2_CELL_8_VOLTAGE,
+  BMS_1_CELL_9_VOLTAGE,
+  BMS_2_CELL_9_VOLTAGE,
+  BMS_1_CELL_10_VOLTAGE,
+  BMS_2_CELL_10_VOLTAGE,
+  BMS_1_CELL_11_VOLTAGE,
+  BMS_2_CELL_11_VOLTAGE,
+  BMS_1_CELL_12_VOLTAGE,
+  BMS_2_CELL_12_VOLTAGE,
+  BMS_1_CELL_13_VOLTAGE,
+  BMS_2_CELL_13_VOLTAGE,
+  BMS_1_CELL_14_VOLTAGE,
+  BMS_2_CELL_14_VOLTAGE,
+  BMS_1_CELL_15_VOLTAGE,
+  BMS_2_CELL_15_VOLTAGE,
+  BMS_1_CELL_16_VOLTAGE,
+  BMS_2_CELL_16_VOLTAGE,
+  BMS_1_CELL_17_VOLTAGE,
+  BMS_2_CELL_17_VOLTAGE,
+  BMS_1_CELL_18_VOLTAGE,
+  BMS_2_CELL_18_VOLTAGE,
+  BMS_1_CELL_19_VOLTAGE,
+  BMS_2_CELL_19_VOLTAGE,
+  BMS_1_CELL_20_VOLTAGE,
+  BMS_2_CELL_20_VOLTAGE,
+  BMS_1_CELL_21_VOLTAGE,
+  BMS_2_CELL_21_VOLTAGE,
+  BMS_1_CELL_22_VOLTAGE,
+  BMS_2_CELL_22_VOLTAGE,
+  BMS_1_CELL_23_VOLTAGE,
+  BMS_2_CELL_23_VOLTAGE,
+  BMS_1_CELL_24_VOLTAGE,
+  BMS_2_CELL_24_VOLTAGE,
+  BMS_1_CELL_25_VOLTAGE,
+  BMS_2_CELL_25_VOLTAGE,
+  BMS_1_CELL_26_VOLTAGE,
+  BMS_2_CELL_26_VOLTAGE,
+  BMS_1_CELL_27_VOLTAGE,
+  BMS_2_CELL_27_VOLTAGE,
+  BMS_1_CELL_28_VOLTAGE,
+  BMS_2_CELL_28_VOLTAGE,
+  BMS_1_CELL_29_VOLTAGE,
+  BMS_2_CELL_29_VOLTAGE,
+  BMS_1_CELL_30_VOLTAGE,
+  BMS_2_CELL_30_VOLTAGE,
+  BMS_1_CURRENT,
+  BMS_2_CURRENT,
+  BMS_1_FACTORY_CAPACITY,
+  BMS_2_FACTORY_CAPACITY,
+  BMS_1_FULL_CYCLES,
+  BMS_2_FULL_CYCLES,
+  BMS_1_MOSFET_TEMPERATURE,
+  BMS_2_MOSFET_TEMPERATURE,
+  BMS_1_REMAINING_CAPACITY,
+  BMS_2_REMAINING_CAPACITY,
+  BMS_1_SOC,
+  BMS_2_SOC,
+  BMS_1_TEMPERATURE_1,
+  BMS_2_TEMPERATURE_1,
+  BMS_1_TEMPERATURE_2,
+  BMS_2_TEMPERATURE_2,
+  BMS_1_TEMPERATURE_3,
+  BMS_2_TEMPERATURE_3,
+  BMS_1_TEMPERATURE_4,
+  BMS_2_TEMPERATURE_4,
+  BMS_1_TEMPERATURE_5,
+  BMS_2_TEMPERATURE_5,
+  BMS_1_TEMPERATURE_6,
+  BMS_2_TEMPERATURE_6,
+  BMS_1_VOLTAGE,
+  BMS_2_VOLTAGE,
   CPU_LOAD,
   ERROR_CODE,
   CURRENT,
@@ -84,20 +156,92 @@ class KingSongEUCSensor : public sensor::Sensor, public KingSongEUCBaseEntity {
 
   void request_state() override {
     switch (this->sensor_type_) {
-      case KingSongEUCSensorType::BMS_CELL_VOLTAGE:
-      case KingSongEUCSensorType::BMS_CURRENT:
-      case KingSongEUCSensorType::BMS_FACTORY_CAPACITY:
-      case KingSongEUCSensorType::BMS_FULL_CYCLES:
-      case KingSongEUCSensorType::BMS_MOSFET_TEMPERATURE:
-      case KingSongEUCSensorType::BMS_REMAINING_CAPACITY:
-      case KingSongEUCSensorType::BMS_SOC:
-      case KingSongEUCSensorType::BMS_TEMPERATURE_1:
-      case KingSongEUCSensorType::BMS_TEMPERATURE_2:
-      case KingSongEUCSensorType::BMS_TEMPERATURE_3:
-      case KingSongEUCSensorType::BMS_TEMPERATURE_4:
-      case KingSongEUCSensorType::BMS_TEMPERATURE_5:
-      case KingSongEUCSensorType::BMS_TEMPERATURE_6:
-      case KingSongEUCSensorType::BMS_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_1_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_1_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_2_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_2_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_3_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_3_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_4_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_4_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_5_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_5_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_6_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_6_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_7_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_7_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_8_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_8_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_9_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_9_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_10_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_10_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_11_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_11_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_12_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_12_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_13_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_13_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_14_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_14_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_15_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_15_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_16_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_16_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_17_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_17_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_18_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_18_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_19_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_19_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_20_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_20_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_21_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_21_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_22_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_22_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_23_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_23_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_24_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_24_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_25_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_25_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_26_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_26_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_27_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_27_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_28_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_28_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_29_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_29_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CELL_30_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_CELL_30_VOLTAGE:
+      case KingSongEUCSensorType::BMS_1_CURRENT:
+      case KingSongEUCSensorType::BMS_2_CURRENT:
+      case KingSongEUCSensorType::BMS_1_FACTORY_CAPACITY:
+      case KingSongEUCSensorType::BMS_2_FACTORY_CAPACITY:
+      case KingSongEUCSensorType::BMS_1_FULL_CYCLES:
+      case KingSongEUCSensorType::BMS_2_FULL_CYCLES:
+      case KingSongEUCSensorType::BMS_1_MOSFET_TEMPERATURE:
+      case KingSongEUCSensorType::BMS_2_MOSFET_TEMPERATURE:
+      case KingSongEUCSensorType::BMS_1_REMAINING_CAPACITY:
+      case KingSongEUCSensorType::BMS_2_REMAINING_CAPACITY:
+      case KingSongEUCSensorType::BMS_1_SOC:
+      case KingSongEUCSensorType::BMS_2_SOC:
+      case KingSongEUCSensorType::BMS_1_TEMPERATURE_1:
+      case KingSongEUCSensorType::BMS_2_TEMPERATURE_1:
+      case KingSongEUCSensorType::BMS_1_TEMPERATURE_2:
+      case KingSongEUCSensorType::BMS_2_TEMPERATURE_2:
+      case KingSongEUCSensorType::BMS_1_TEMPERATURE_3:
+      case KingSongEUCSensorType::BMS_2_TEMPERATURE_3:
+      case KingSongEUCSensorType::BMS_1_TEMPERATURE_4:
+      case KingSongEUCSensorType::BMS_2_TEMPERATURE_4:
+      case KingSongEUCSensorType::BMS_1_TEMPERATURE_5:
+      case KingSongEUCSensorType::BMS_2_TEMPERATURE_5:
+      case KingSongEUCSensorType::BMS_1_TEMPERATURE_6:
+      case KingSongEUCSensorType::BMS_2_TEMPERATURE_6:
+      case KingSongEUCSensorType::BMS_1_VOLTAGE:
+      case KingSongEUCSensorType::BMS_2_VOLTAGE:
       case KingSongEUCSensorType::CPU_LOAD:
       case KingSongEUCSensorType::ERROR_CODE:
       case KingSongEUCSensorType::CURRENT:
