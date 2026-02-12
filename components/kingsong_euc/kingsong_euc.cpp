@@ -101,6 +101,7 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
       break;
     }
     case ESP_GATTC_NOTIFY_EVT: {
+      ESP_LOGW(TAG, "ESP_GATTC_NOTIFY_EVT");
       if (param->notify.conn_id != this->parent()->get_conn_id())
         break;
       if (param->notify.handle != this->char_handle_)
