@@ -28,7 +28,7 @@ void KingSongEUCClient::send_request_(std::unique_ptr<KingSongEUCCommand> reques
                                          this->char_handle_, sizeof(KingSongEUCCommand), (uint8_t *) request,
                                          ESP_GATT_WRITE_TYPE_NO_RSP, ESP_GATT_AUTH_REQ_NONE);
   if (status)
-    ESP_LOGW(TAG, "[%s] esp_ble_gattc_write_char failed, status=%d", this->parent_->address_str().c_str(), status);
+    ESP_LOGW(TAG, "[%s] esp_ble_gattc_write_char failed, status=%d", this->parent_->address_str(), status);
 }
 
 }  // namespace kingsong_euc

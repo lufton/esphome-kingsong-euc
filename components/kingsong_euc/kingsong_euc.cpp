@@ -86,7 +86,7 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
       auto *chr = this->parent_->get_characteristic(SERVICE_UUID, CHARACTERISTIC_UUID);
       if (chr == nullptr) {
         ESP_LOGW(TAG, "[%s] No control service found at device, not a KingSong EUC..?",
-                 this->parent_->address_str().c_str());
+                 this->parent_->address_str());
         this->status_set_warning("No control service found at device, not a KingSong EUC..?");
         break;
       }
