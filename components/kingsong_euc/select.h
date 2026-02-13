@@ -43,7 +43,9 @@ class KingSongEUCSelect : public select::Select, public KingSongEUCBaseEntity {
 
   void publish_state(const std::string &state) {
     const std::string prev_state = this->current_option();
-    this->control(state);
+    optional<size_t> index = this->index_of(state);
+    if (!index.has_value()) return;
+    this->active_index_ = index.value();
     this->set_has_state(true);
     this->just_updated();
     if (state != prev_state)
