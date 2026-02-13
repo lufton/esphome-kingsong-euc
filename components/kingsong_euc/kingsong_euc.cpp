@@ -91,8 +91,11 @@ void KingSongEUC::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t 
         break;
       }
       this->char_handle_ = chr->handle;
-      auto status = esp_ble_gattc_register_for_notify(this->parent_->get_gattc_if(), this->parent_->get_remote_bda(),
-                                                      chr->handle);
+      auto status = esp_ble_gattc_register_for_notify(
+        this->parent_->get_gattc_if(),
+        this->parent_->get_remote_bda(),
+        chr->handle
+      );
       if (status) {
         ESP_LOGW(TAG, "esp_ble_gattc_register_for_notify failed, status=%d", status);
         this->status_set_warning("Failed to register for notifications, not a KingSong EUC..?");
