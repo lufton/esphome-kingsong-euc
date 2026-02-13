@@ -27,9 +27,9 @@ MULTI_CONF = True
 
 CONFIG_SCHEMA = (
     cv.Schema(
-    {
-        cv.GenerateID(): cv.declare_id(KingSongEUC),
-    }
+        {
+            cv.GenerateID(): cv.declare_id(KingSongEUC),
+        }
     )
     .extend(cv.COMPONENT_SCHEMA)
     .extend(ble_client.BLE_CLIENT_SCHEMA)

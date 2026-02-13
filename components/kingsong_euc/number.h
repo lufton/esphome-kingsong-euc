@@ -82,7 +82,7 @@ class KingSongEUCNumber : public number::Number, public KingSongEUCBaseEntity {
         uint8_t command = static_cast<uint8_t>(std::round(value));
         this->get_parent()->send_command(value);
         ESP_LOGD(TAG, "Sending command: 0x%2X (%d)", command, command);
-      return;
+        return;
     }
     this->publish_state(value);
     switch (this->number_type_) {

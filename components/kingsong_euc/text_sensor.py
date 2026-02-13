@@ -73,16 +73,16 @@ BMS_TEXT_SENSOR_TYPES = {
 DEFAULT_TEXT_SENSOR_SCHEMA = (
     report_interval_schema()
     .extend(cv.polling_component_schema("never"))
-        )
+)
 
 CONFIG_SCHEMA = (
     KINGSONG_EUC_COMPONENT_CONFIG_SCHEMA
     .extend(
         {
             cv.Optional(text_sensor_type): schema.extend(DEFAULT_TEXT_SENSOR_SCHEMA)
-        for text_sensor_type, schema in TEXT_SENSOR_TYPES.items()
-    }
-)
+            for text_sensor_type, schema in TEXT_SENSOR_TYPES.items()
+        }
+    )
     .extend(
         {
             cv.Optional(text_sensor_type.format(bms + 1)): schema.extend(DEFAULT_TEXT_SENSOR_SCHEMA)

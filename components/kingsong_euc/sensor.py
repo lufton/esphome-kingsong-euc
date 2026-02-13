@@ -328,13 +328,12 @@ BMS_CELL_VOLTAGE_SENSOR_TYPES = {
 
 DEFAULT_SENSOR_SCHEMA = (
     cv.Schema({
-                cv.Optional(
-                    CONF_HYSTERESIS, default=0xFFFFFFFF
-                ): cv.positive_not_null_float,
-            }
-        )
-        .extend(report_interval_schema())
-        .extend(cv.polling_component_schema("never"))
+        cv.Optional(
+            CONF_HYSTERESIS, default=0xFFFFFFFF
+        ): cv.positive_not_null_float,
+    })
+    .extend(report_interval_schema())
+    .extend(cv.polling_component_schema("never"))
 )
 
 CONFIG_SCHEMA = (
@@ -342,9 +341,9 @@ CONFIG_SCHEMA = (
     .extend(
         {
             cv.Optional(sensor_type): schema.extend(DEFAULT_SENSOR_SCHEMA)
-        for sensor_type, schema in SENSOR_TYPES.items()
-    }
-)
+            for sensor_type, schema in SENSOR_TYPES.items()
+        }
+    )
     .extend(
         {
             cv.Optional(sensor_type.format(bms + 1)): schema.extend(DEFAULT_SENSOR_SCHEMA)
